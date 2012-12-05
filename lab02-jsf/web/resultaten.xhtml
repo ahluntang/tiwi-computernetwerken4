@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="Top">
+                Gevonden resultaten
+            </ui:define>
+
+            <ui:define name="Content">
+                <h:dataTable  value="#{search.immotypes}" var="result"  class="table table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            Adres
+                        </f:facet>
+                        <h:outputText value="#{result.straat}"/> 
+                        <h:outputText value="#{result.nummer}"/>,
+                        <h:outputText value="#{result.gemeente.postcode}"/> 
+                        <h:outputText value="#{result.gemeente.naam}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Prijs
+                        </f:facet>
+                        <h:outputText value="#{result.vraagPrijs}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Status
+                        </f:facet>
+                        <h:outputText value="#{result.status}"/>
+                    </h:column>
+                </h:dataTable>
+            </ui:define>
+
+            <ui:define name="Bottom">
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

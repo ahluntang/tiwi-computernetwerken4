@@ -4,3 +4,10 @@
 *.jar
 *.war
 *.ear
+
+
+nbproject/
+build/
+build.xml
+dist/
+

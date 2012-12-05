@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="Top">
+                Zoek pand
+            </ui:define>
+
+            <ui:define name="Content">
+                <h:form class="form-horizontal">
+                    <div class="control-group">
+                        <label for="type" class="control-label">Type pand:</label>
+                        <div class="controls">
+                            <h:selectOneMenu id="type" value="#{search.immotype}">
+                                <f:selectItems value="#{ImmoDataBean.gebouwTypes}"/>
+                            </h:selectOneMenu>
+                            <h:message for="type" class="help-inline"></h:message>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="min" class="control-label">Minimum prijs:</label>
+                        <div class="controls">
+                            <h:inputText  id="min" value="#{search.min}" required="true">
+                                <f:validateDoubleRange minimum="0.0" />
+                            </h:inputText>
+                            <h:message for="min" class="help-inline"></h:message>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="max" class="control-label">Maximum prijs:</label>
+                        <div class="controls">
+                            <h:inputText  id="max" value="#{search.max}" required="true">
+                                <f:validateDoubleRange minimum="0.0" />
+                            </h:inputText>
+                            <h:message for="max" class="help-inline"></h:message>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <h:commandButton value="Zoeken" action="#{search.searchImmo}" class="btn btn-primary" />
+                    </div>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="Bottom">
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

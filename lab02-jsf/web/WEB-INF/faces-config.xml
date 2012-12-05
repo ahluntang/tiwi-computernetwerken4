@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.1"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    <managed-bean>
+        <managed-bean-name>currentdate</managed-bean-name>
+        <managed-bean-class>java.util.Date</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>immoData</managed-bean-name>
+        <managed-bean-class>be.hogent.iii.immo.jdbc.implementatie.ImmoDataStorage</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <!-- PROPERTIES INSTELLEN, zie voorbeeldklasse:
+            // aanmaken en instellen datalaag
+            ImmoDataStorage immo = new ImmoDataStorage();
+            immo.setDriver("com.mysql.jdbc.Driver");
+            immo.setConnectieString("jdbc:mysql://localhost:3306/immo");
+            immo.setUsername("gast");
+            immo.setWachtwoord("gast");
+        -->
+        <managed-property>
+            <property-name>driver</property-name>    
+            <value>com.mysql.jdbc.Driver</value>
+        </managed-property>
+        <managed-property>
+            <property-name>connectieString</property-name>    
+            <value>jdbc:mysql://localhost:3306/immo</value>
+        </managed-property>
+        <managed-property>
+            <property-name>username</property-name>    
+            <value>gast</value>
+        </managed-property>
+        <managed-property>
+            <property-name>wachtwoord</property-name>    
+            <value>gast</value>
+        </managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ImmoDataBean</managed-bean-name>
+        <managed-bean-class>be.ahlun.immo.ImmoDataBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>immoData</property-name>
+            <value>#{immoData}</value>
+        </managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>search</managed-bean-name>
+        <managed-bean-class>be.ahlun.immo.ImmoSearch</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>immoData</property-name>
+            <value>#{immoData}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{search.searchImmo}</from-action>
+            <from-outcome>found</from-outcome>
+            <to-view-id>/resultaten.xhtml</to-view-id>
+        </navigation-case>        
+        <navigation-case>
+            <from-action>#{search.searchImmo}</from-action>
+            <from-outcome>notfound</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
