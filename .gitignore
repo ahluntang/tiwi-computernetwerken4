@@ -4,10 +4,16 @@
 *.jar
 *.war
 *.ear
+*.dll
+*.pdb
 
 
 nbproject/
 build/
 build.xml
 dist/
+TestResults/
+bin/
+Debug/
+App_Data/
 

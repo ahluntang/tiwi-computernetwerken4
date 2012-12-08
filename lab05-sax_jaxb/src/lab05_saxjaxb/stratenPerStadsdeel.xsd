@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="stadsdelen">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="stadsdeel" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+        
+    <xs:element name="stadsdeel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="naam"></xs:element>
+                <xs:element name="wijk" type="wijk" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="naam" type="xs:string"></xs:element>
+    <xs:complexType name="wijk">
+        <xs:sequence>            
+            <xs:element ref="naam"></xs:element>
+            <xs:element name="straat" type="straat" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="nr" type="xs:positiveInteger">          
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="straat">
+        <xs:sequence>
+            <xs:element ref="naam"></xs:element>
+            <xs:element name="onpaar" type="nummers" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="paar" type="nummers" minOccurs="0" maxOccurs="1"></xs:element>
+            <xs:element name="sector" type="xs:token"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="code" type="xs:positiveInteger">          
+        </xs:attribute>
+        <xs:attribute name="postcode" type="xs:integer">          
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="nummers">
+        <xs:attribute name="van" type="xs:token"></xs:attribute>
+        <xs:attribute name="tot" type="xs:token"></xs:attribute>
+    </xs:complexType>
+</xs:schema>

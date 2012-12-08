@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BadmintonServiceLibrary" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BadmintonServiceLibrary" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfSportClubType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SportClubType" nillable="true" type="tns:SportClubType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSportClubType" nillable="true" type="tns:ArrayOfSportClubType" />
+  <xs:complexType name="SportClubType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Leden" nillable="true" type="tns:ArrayOfLidType" />
+      <xs:element minOccurs="0" name="Naam" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tornooien" nillable="true" type="tns:ArrayOfTornooiType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SportClubType" nillable="true" type="tns:SportClubType" />
+  <xs:complexType name="ArrayOfLidType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LidType" nillable="true" type="tns:LidType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLidType" nillable="true" type="tns:ArrayOfLidType" />
+  <xs:complexType name="LidType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Club" nillable="true" type="tns:SportClubType" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Naam" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LidType" nillable="true" type="tns:LidType" />
+  <xs:complexType name="ArrayOfTornooiType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TornooiType" nillable="true" type="tns:TornooiType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTornooiType" nillable="true" type="tns:ArrayOfTornooiType" />
+  <xs:complexType name="TornooiType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Deelnemers" nillable="true" type="tns:ArrayOfSpelerType" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Naam" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Organisator" nillable="true" type="tns:SportClubType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TornooiType" nillable="true" type="tns:TornooiType" />
+  <xs:complexType name="ArrayOfSpelerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SpelerType" nillable="true" type="tns:SpelerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSpelerType" nillable="true" type="tns:ArrayOfSpelerType" />
+  <xs:complexType name="SpelerType">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:LidType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Categorie" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Tornooien" nillable="true" type="tns:ArrayOfTornooiType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SpelerType" nillable="true" type="tns:SpelerType" />
+</xs:schema>
